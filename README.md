@@ -8,11 +8,11 @@ This example is based on the file structure of [wePOS](https://github.com/weDevs
 // Added at the bottom of Bootstrap.js
 // wepos.hooks comes from the @wordpress/hooks package 
 
-wepos.addFilter = (hookName, namespace, component) => {
+wepos.addFilter = (hookName, namespace, component, priority = 10) => {
     wepos.hooks.addFilter(hookName, namespace, (components) => {
         components.push(component);
         return components;
-    } );
+    }, priority );
 };
 ```
 
@@ -28,7 +28,7 @@ import HomeBeforeItemsWrapper from 'frontend/components/HomeBeforeItemsWrapper.v
 // the follwing `weposHomeSampleList` and `weposHomeBeforeItemsWrapper` hooknames are
 // used in $data properties in Home.vue
 wepos.addFilter('weposHomeSampleList', 'weposHome', HomeSampleListOne);
-wepos.addFilter('weposHomeSampleList', 'weposHome', HomeSampleListTwo);
+wepos.addFilter('weposHomeSampleList', 'weposHome', HomeSampleListTwo, 9); // Two will render before One
 wepos.addFilter('weposHomeBeforeItemsWrapper', 'weposHome', HomeBeforeItemsWrapper);
 ```
 
